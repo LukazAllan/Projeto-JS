@@ -24,13 +24,14 @@ function inserirMensagem() {
     //         nome: "nome da pessoa",
     //         email: "email informado",
     //         mensagem: "a mensagem informada"}
+    var agora = new Date();
+    timeStamp = agora.toLocaleString('pt', { timeZone: 'America/Sao_Paulo' });
     var mensagem = {
         nome: form.querySelector("#nome").value,
         email: form.querySelector("#email").value,
-        mensagem: form.querySelector("#msg").value,
+        mensagem: form.querySelector("#msg").value +"\nÀs "+ timeStamp,
     };
     console.log(mensagem);
-
     var inserir = $.ajax({
         url: "https://app-p2-js-c88e9128234a.herokuapp.com/mensagens",
         method: "POST",
