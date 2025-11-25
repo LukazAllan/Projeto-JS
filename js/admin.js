@@ -1,13 +1,13 @@
 let botao = window.document.getElementById("enviar");
 
 botao.addEventListener("click", () => {
-    console.log("Aqui se envia uma mensagem!");
-    inserirMensagem();
+    console.log("Aqui se valida um usuário!");
+    validarUsuario();
 });
 
 botao.addEventListener("keydown", (event) => {
-    console.log("Aqui se envia uma mensagem!");
+    console.log("Aqui se valida um usuário!");
     if (event.key == 'Enter'){
-        inserirMensagem();
+       validarUsuario();
     }
 });
