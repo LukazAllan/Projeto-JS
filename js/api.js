@@ -25,11 +25,11 @@ function inserirMensagem() {
     //         email: "email informado",
     //         mensagem: "a mensagem informada"}
     var agora = new Date();
-    timeStamp = agora.toLocaleString('pt', { timeZone: 'America/Sao_Paulo' });
+    timeStamp = agora.toLocaleString("pt", { timeZone: "America/Sao_Paulo" });
     var mensagem = {
         nome: form.querySelector("#nome").value,
         email: form.querySelector("#email").value,
-        mensagem: form.querySelector("#msg").value +"\nÀs "+ timeStamp,
+        mensagem: form.querySelector("#msg").value + "\nÀs " + timeStamp,
     };
     console.log(mensagem);
     var inserir = $.ajax({
@@ -46,13 +46,10 @@ function validarUsuario(objLoginSenha) {
     //email: admin@admin.com
     //senha: '1234'
 
-    /*
-
     var objLoginSenha = {
-            email: "email informado", 
-            senha: "senha informada"} 
-
-    */
+        email: form.querySelector("#email"),
+        senha: form.querySelector("#senha"),
+    };
 
     var retorno = false;
 
@@ -73,6 +70,6 @@ function validarUsuario(objLoginSenha) {
     validacao.done(function (data) {
         retorno = data;
     });
-
+    window.alert(retorno);
     return retorno;
 }
