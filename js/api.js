@@ -47,9 +47,10 @@ function validarUsuario(objLoginSenha) {
     //senha: '1234'
 
     var objLoginSenha = {
-        email: form.querySelector("#email"),
-        senha: form.querySelector("#senha"),
+        email: form.querySelector("#email").value,
+        senha: form.querySelector("#senha").value,
     };
+    console.log(objLoginSenha);
 
     var retorno = false;
 
