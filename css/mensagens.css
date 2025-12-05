@@ -1,4 +1,15 @@
-#tabela {
-    border: 1px solid black;
-    border-radius: 3px;
+:root {
+    --background: #EBEBEB;
+    --darkblue: #21272b;
+    --lightoblue: #758a97;
+    --box: #21272bc9;
+    --lightblue: #1bb4e8;
+    --ocher: #ffae00;
+    --footer: #CBCFD3;
+    --pagefont: 'Open Sans', sans-serif;
+}
+
+tr, th, td {
+    padding: 3px;
+    border-bottom: 1px solid var(--lightoblue);
 }
