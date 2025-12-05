@@ -24,12 +24,13 @@ function validarUsuario(objLoginSenha) {
         data: JSON.stringify(objLoginSenha),
     }).fail(function () {
         return retorno;
+        window.alert("Usuário ou senha inválidos!");
     });
 
     validacao.done(function (data) {
         retorno = data;
     });
-    window.alert(retorno);
+    
     return retorno;
 }
 
