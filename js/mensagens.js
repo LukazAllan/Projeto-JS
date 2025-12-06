@@ -24,15 +24,6 @@ function is_visto(id) {
     return false;
 }
 
-document.querySelector("#atualizar").addEventListener("click", () => {
-    load();
-});
-document.querySelector("#atualizar").addEventListener("keydown", (event) => {
-    if (event.key == 'Enter'){
-        load();
-    }
-});
-
 function obterMensagens() {
     var retorno = [];
 
@@ -48,7 +39,6 @@ function obterMensagens() {
     consulta.done(function (data) {
         retorno = data;
     });
-
     return retorno;
 }
 
@@ -100,12 +90,12 @@ function mostrarMensagens(mensagens) {
 function clear() {
     let N = document.querySelector("#mensagens").children.length;
     for (let i = 0; i < N; i++) {
-        document.querySelector(`#apagar${i}`).removeEventListener("click", () => {
-            apagarMensagem(i);
+        document.querySelector(`#excluir${i}`).removeEventListener("click", () => {
+            excluirMensagem(i);
         });
-        document.querySelector(`#apagar${i}`).removeEventListener("keydown", (event) => {
+        document.querySelector(`#excluir${i}`).removeEventListener("keydown", (event) => {
             if (event.key == 'Enter'){
-                apagarMensagem(i);
+                excluirMensagem(i);
             }
         });
     }
@@ -114,7 +104,7 @@ function clear() {
 
 function load() {
     clear();
-    mostrarMensagens(obterMensagens());
+    mostrarMensagens(mensagens);
     console.log('loaded');
 }
 
@@ -134,4 +124,30 @@ if (get_visto_ate() !== NaN) {
     set_visto_ate(vistoAte);
 }
 
+
+// Listeners
+document.querySelector("#atualizar").addEventListener("click", () => {
+    load();
+});
+document.querySelector("#atualizar").addEventListener("keydown", (event) => {
+    if (event.key == 'Enter'){
+        load();
+    }
+});
+
+document.querySelector("#ler_todos").addEventListener("click", () => {
+    vistoAte = form.childNodes[form.childNodes.length - 1]
+    set_visto_ate(vistoAte);
+    load();
+});
+document.querySelector("#ler_todos").addEventListener("keydown", (event) => {
+    if (event.key == 'Enter'){
+        vistoAte = obterMensagens().length;
+        set_visto_ate(vistoAte);
+        load();
+    }
+});
+// Initial
+mensagens = obterMensagens();
+set_mensagens(mensagens);
 load();

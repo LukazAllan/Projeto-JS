@@ -45,7 +45,7 @@ function inserirMensagem() {
     var mensagem = {
         nome: form.querySelector("#nome").value,
         email: form.querySelector("#email").value,
-        mensagem: form.querySelector("#msg").value /*+ "\nÀs " + timeStamp*/,
+        mensagem: form.querySelector("#msg").value 
     };
     console.log(mensagem);
     var inserir = $.ajax({
