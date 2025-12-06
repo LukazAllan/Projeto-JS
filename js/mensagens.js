@@ -55,27 +55,41 @@ function obterMensagens() {
 function mostrarMensagens(mensagens) {
     let L = mensagens.length;
     for (let i = 1; i <= mensagens.length; i++) {
-    // for (m of mensagens) {
-        if (is_visto(mensagens[L-i]['id'])) {
-            form.innerHTML =
-                form.innerHTML +
-                `<tr><td>${mensagens[L-i]['id']}</td><td>${mensagens[L-i]['nome']}</td><td>${mensagens[L-i]['email']}</td><td>${mensagens[L-i]['mensagem']}</td><td><div class="buttons">\
-       <button id="enviar" class="button">Apagar</button>\
-      </div></td></tr>`;
-        } else {
-            form.innerHTML =
-            form.innerHTML +
-            `<tr class="not_seen"><td>${mensagens[L-i]['id']}</td><td>${mensagens[L-i]['nome']}\
-            </td><td>${mensagens[L-i]['email']}</td><td>${mensagens[L-i]['mensagem']}</td><td>\
-            <div class="buttons"><button id="apagar${L-i}" class="button">Apagar</button>\
-            </div></td></tr>`;
+        Linha = document.createElement("tr");
+        id = document.createElement("td");
+        nome = document.createElement("td");
+        email = document.createElement("td");
+        msg = document.createElement("td");
+        
+        if (!is_visto(mensagens[L-i]['id'])) {
+            Linha.classList.add("not_seen");
         }
-        document.querySelector(`#apagar${L-i}`).addEventListener("click", () => {
-            apagarMensagem(mensagens[L-i]['id']);
+        
+        id.innerText = mensagens[L-i]['id'];
+        nome.innerText = mensagens[L-i]['nome'];
+        email.innerText = mensagens[L-i]['email'];
+        msg.innerText = mensagens[L-i]['mensagem'];
+        
+        botoes = document.createElement("td");
+        botao_excluir = document.createElement("button");
+        botao_excluir.classList.add("button");
+        botao_excluir.id = `excluir${L-i}`;
+        botao_excluir.innerText = "Excluir";
+        botoes.appendChild(botao_excluir);
+
+        Linha.appendChild(id);
+        Linha.appendChild(nome);
+        Linha.appendChild(email);
+        Linha.appendChild(msg);
+        Linha.appendChild(botoes);
+
+        form.appendChild(Linha);
+        document.querySelector(`#excluir${L-i}`).addEventListener("click", () => {
+            excluirMensagem(mensagens[L-i]['id']);
         });
-        document.querySelector(`#apagar${L-i}`).addEventListener("keydown", (event) => {
+        document.querySelector(`#excluir${L-i}`).addEventListener("keydown", (event) => {
             if (event.key == 'Enter'){
-                apagarMensagem(mensagens[L-i]['id']);
+                excluirMensagem(mensagens[L-i]['id']);
             }
         });
 
