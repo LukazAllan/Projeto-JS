@@ -13,3 +13,7 @@ tr, th, td {
     padding: 3px;
     border-bottom: 1px solid var(--lightoblue);
 }
+
+.not_seen {
+    font-weight: bold;
+}
