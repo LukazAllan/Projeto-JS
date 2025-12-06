@@ -23,8 +23,8 @@ function validarUsuario(objLoginSenha) {
         contentType: "application/json",
         data: JSON.stringify(objLoginSenha),
     }).fail(function () {
-        return retorno;
         window.alert("Usuário ou senha inválidos!");
+        return retorno;
     });
 
     validacao.done(function (data) {
@@ -45,7 +45,7 @@ function inserirMensagem() {
     var mensagem = {
         nome: form.querySelector("#nome").value,
         email: form.querySelector("#email").value,
-        mensagem: form.querySelector("#msg").value + "\nÀs " + timeStamp,
+        mensagem: form.querySelector("#msg").value /*+ "\nÀs " + timeStamp*/,
     };
     console.log(mensagem);
     var inserir = $.ajax({
@@ -56,4 +56,8 @@ function inserirMensagem() {
         async: false,
         contentType: "application/json",
     });
+    inserir.done(function (data) {
+        console.log("Mensagem inserida com sucesso!");
+        window.alert("Mensagem enviada com sucesso!");
+    })
 }
