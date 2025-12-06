@@ -9,6 +9,10 @@
     --pagefont: 'Open Sans', sans-serif;
 }
 
+table {
+    font-size: small;
+}
+
 tr, th, td {
     padding: 3px;
     border-bottom: 1px solid var(--lightoblue);
