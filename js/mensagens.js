@@ -9,11 +9,11 @@ function set_visto_ate(inteiro) {
     localStorage.setItem("vistoAte", inteiro.toString());
 }
 
-function get_mensagens() {
+function get_mensagens_local() {
     return JSON.parse(localStorage.getItem("mensagens"));
 }
 
-function set_mensagens(mensagens) {
+function set_mensagens_local(mensagens) {
     localStorage.setItem("mensagens", JSON.stringify(mensagens));
 }
 
@@ -42,6 +42,36 @@ function obterMensagens() {
     return retorno;
 }
 
+function excluirMensagem(arrayPos) {
+    //window.alert(`Excluindo mensagem de index ${arrayPos}`);
+    fazer = window.confirm(`Tem certeza que deseja excluir a mensagem de ID ${arrayPos[id]}? Esta ação não pode ser desfeita.`);
+    if (fazer) {
+        mensagens.splice(arrayPos, 1);
+        document.querySelector(`#excluir${arrayPos}`).removeEventListener("click", () => {
+            excluirMensagem(arrayPos);
+        });
+        document.querySelector(`#excluir${arrayPos}`).removeEventListener("keydown", (event) => {
+            if (event.key == 'Enter') {
+                excluirMensagem(arrayPos);
+            }
+        });
+    }
+    set_mensagens_local(mensagens);
+    mensagens = get_mensagens_local();
+    mostrarMensagens(mensagens);
+
+}
+
+function atualizarMensagens() {
+    let O = obterMensagens();
+    mensagens =[]
+    O.forEach(element => {
+        if (!mensagens.includes(element)) {
+            mensagens.push(element);
+        }
+    });
+}
+
 function ler(id) {
     if (!is_visto(id)) {
         console.log(`Lendo até mensagem de id ${id}`);
@@ -53,6 +83,7 @@ function ler(id) {
 }
 
 function mostrarMensagens(mensagens) {
+    clear();
     let L = mensagens.length;
     for (let i = 1; i <= mensagens.length; i++) {
         Linha = document.createElement("tr");
@@ -65,6 +96,7 @@ function mostrarMensagens(mensagens) {
             Linha.classList.add("not_seen");
         }
 
+        Linha.id = (L-i).toString();
         id.innerText = mensagens[L - i]['id'];
         nome.innerText = mensagens[L - i]['nome'];
         email.innerText = mensagens[L - i]['email'];
@@ -91,11 +123,11 @@ function mostrarMensagens(mensagens) {
         form.appendChild(Linha);
 
         document.querySelector(`#excluir${L - i}`).addEventListener("click", () => {
-            excluirMensagem(mensagens[L - i]['id']);
+            excluirMensagem(Linha.id);
         });
         document.querySelector(`#excluir${L - i}`).addEventListener("keydown", (event) => {
             if (event.key == 'Enter') {
-                excluirMensagem(mensagens[L - i]['id']);
+                excluirMensagem(Linha.id);
             }
         });
 
@@ -109,7 +141,7 @@ function mostrarMensagens(mensagens) {
         });
 
     }
-
+    console.log("Mensagens exibidas com sucesso!");
 }
 
 function clear() {
@@ -128,7 +160,6 @@ function clear() {
 }
 
 function load() {
-    clear();
     mostrarMensagens(mensagens);
     //vistoAte = mensagens[mensagens.length - 1]['id'];
     set_visto_ate(vistoAte);
@@ -154,8 +185,7 @@ if (get_visto_ate() !== NaN) {
 
 // Listeners
 function atualizar() {
-    mensagens = obterMensagens();
-    set_mensagens(mensagens);
+    atualizarMensagens();
     load();
 }
 document.querySelector("#atualizar").addEventListener("click", () => {
@@ -181,6 +211,17 @@ document.querySelector("#ler_todos").addEventListener("keydown", (event) => {
     }
 });
 // Initial
-mensagens = obterMensagens();
-set_mensagens(mensagens);
+if (get_mensagens_local() !== null) {
+    mensagens = get_mensagens_local();
+} else {
+    mensagens = obterMensagens();
+    set_mensagens_local(mensagens);
+}
+
+if (get_visto_ate() === NaN) {
+    vistoAte = 0;
+    set_visto_ate(vistoAte);
+} else {
+    vistoAte = get_visto_ate();
+}
 load();
