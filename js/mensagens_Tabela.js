@@ -4,22 +4,23 @@ class Tabela {
     }
 
     constructMensagemLinha(mensagem, func, L, i) {
-        console.log('exibirNaTela()');
+        // console.log('exibirNaTela()');
         var Linha = document.createElement("tr");
         var id = document.createElement("td");
         var nome = document.createElement("td");
         var email = document.createElement("td");
         var msg = document.createElement("td");
 
-        if (!func(mensagem['id'])) { // is_visto
+        if (!func(mensagem["id"])) {
+            // is_visto
             Linha.classList.add("not_seen");
         }
 
         Linha.id = (L - i).toString();
-        id.innerText = mensagem['id'];
-        nome.innerText = mensagem['nome'];
-        email.innerText = mensagem['email'];
-        msg.innerText = mensagem['mensagem'];
+        id.innerText = mensagem["id"];
+        nome.innerText = mensagem["nome"];
+        email.innerText = mensagem["email"];
+        msg.innerText = mensagem["mensagem"];
 
         var botoes = document.createElement("td");
         var botao_excluir = document.createElement("button");
@@ -38,28 +39,28 @@ class Tabela {
         Linha.appendChild(email);
         Linha.appendChild(msg);
         Linha.appendChild(botoes);
-        console.log('exibirNaTela() => return');
+        console.log("constructMensagemLinha() => return");
         return Linha;
     }
 
     limpaTabela() {
-        console.log('limpaTabela()');
+        console.log("limpaTabela()");
         let N = this.form.children.length;
         for (let i = 0; i < N; i++) {
             document.querySelector(`#excluir${i}`).removeEventListener("click", () => {
                 excluirMensagem(i);
             });
             document.querySelector(`#excluir${i}`).removeEventListener("keydown", (event) => {
-                if (event.key == 'Enter') {
+                if (event.key == "Enter") {
                     excluirMensagem(i);
                 }
             });
         }
-        this.form.innerHTML = '';
+        this.form.innerHTML = "";
     }
 
     exibirNaTabela(form, mensagens, func) {
-        console.log('exibirNaTabela()');
+        console.log("exibirNaTabela()");
         this.limpaTabela(form);
         let L = mensagens.length;
         let Linha;
