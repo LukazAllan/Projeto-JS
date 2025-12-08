@@ -57,8 +57,9 @@ class Tabela {
 
     exibirNaTabela(form, mensagens, func) {
         this.limpaTabela(form);
+        console.log('exibirNaTela()')
         let L = mensagens.length;
-        for (let i = 1; i <= mensagens.length; i++) {
+        for (let i = 1; i <= L; i++) {
             Linha = this.constructMensagemLinha(mensagens[L - i], func, L, i);
             form.appendChild(Linha);
         }

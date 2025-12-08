@@ -1,3 +1,18 @@
+/*
+State
+    is_visto(id)
+    obterMensagens()
+    excluirMensagem(arrayPos)
+    pullMensagensOrigin()
+    pullMensagensLocal()
+    pushMensagensLocal()
+    pullVistoAteLocal()
+    pushVistoAteLocal()
+    writeTabela()
+    eraseTabela()
+    atualizarMensagens()
+    ler(id)
+*/
 class State {
     constructor(form) {
         this.form = form;
@@ -29,6 +44,7 @@ class State {
         consulta.done(function (data) {
             retorno = data;
         });
+        console.log(retorno[0])
         return retorno;
     }
 
