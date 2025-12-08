@@ -16,20 +16,20 @@ document.querySelector("#atualizar").addEventListener("keydown", (event) => {
     }
 });
 
-// function ler_todos() {
-//     state.vistoAte = state.mensagens[state.mensagens.length - 1]["id"];
-//     state.pushVistoAteLocal();
-//     state.eraseTabela();
-//     state.writeTabela();
-// }
-// document.querySelector("#ler_todos").addEventListener("click", () => {
-//     ler_todos();
-// });
-// document.querySelector("#ler_todos").addEventListener("keydown", (event) => {
-//     if (event.key == "Enter") {
-//         ler_todos();
-//     }
-// });
+function ler_todos() {
+    state.vistoAte = state.mensagens[state.mensagens.length - 1]["id"];
+    state.pushVistoAteLocal();
+    state.eraseTabela();
+    state.writeTabela();
+}
+document.querySelector("#ler_todos").addEventListener("click", () => {
+    ler_todos();
+});
+document.querySelector("#ler_todos").addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+        ler_todos();
+    }
+});
 
 // L = state.mensagens.length;
 // for (let i = 1; i <= L; i++) {
