@@ -67,7 +67,7 @@ class State {
     }
 
     pullMensagensOrigin() {
-        this.mensagens = obterMensagens();
+        this.mensagens = this.obterMensagens();
     }
 
     pullMensagensLocal() {
@@ -87,7 +87,13 @@ class State {
     }
 
     writeTabela(){
-        this.tabela.exibirNaTabela(this.form, this.mensagens, this.is_visto);
+        this.tabela.exibirNaTabela(this.form, this.obterMensagens(), (id) => {
+        if (id <= this.vistoAte) {
+            return true;
+        }
+        return false;
+    });
+        // this.obterMensagens()
     }
 
     eraseTabela(){
